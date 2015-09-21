@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.menus">
+         <menuContribution
+               locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+               <menu
+                     id="com.mkalakota.eplugs.menu.openin"
+                     label="Open In">
+		               <command
+		                     commandId="com.mkalakota.eplugs.handler.openin.explorer"
+		                     label="Explorer" style="push">
+			               <visibleWhen
+			                  checkEnabled="false">
+					               <with
+					                     variable="activeMenuSelection">
+					                  <iterate
+					                        ifEmpty="false"
+					                        operator="or">
+					                     <adapt
+					                           type="org.eclipse.core.resources.IResource">
+					                     </adapt>
+					                  </iterate>
+					               </with>
+			               </visibleWhen>
+		               </command>
+		               <command
+		                     commandId="com.mkalakota.eplugs.handler.openin.cmd"
+		                     label="Command Prompt" style="push">
+			               <visibleWhen
+			                  checkEnabled="false">
+					               <with
+					                     variable="activeMenuSelection">
+					                  <iterate
+					                        ifEmpty="false"
+					                        operator="or">
+					                     <adapt
+					                           type="org.eclipse.core.resources.IResource">
+					                     </adapt>
+					                  </iterate>
+					               </with>
+			               </visibleWhen>
+		               </command>
+               </menu>
+         </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+	         <command
+	               defaultHandler="com.mkalakota.eplugs.openin.handler.ExplorerHandler"
+	               id="com.mkalakota.eplugs.handler.openin.explorer" name="Explorer">
+	         </command>
+	         <command
+	               defaultHandler="com.mkalakota.eplugs.openin.handler.CommandPromptHandler"
+	               id="com.mkalakota.eplugs.handler.openin.cmd" name="Command Prompt">
+	         </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="com.mkalakota.eplugs.handler.openin.explorer"
+            sequence="Alt+,"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+      <key
+            commandId="com.mkalakota.eplugs.handler.openin.cmd"
+            sequence="Alt+."
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+   </extension>
+</plugin>
